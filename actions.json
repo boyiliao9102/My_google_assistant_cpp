@@ -1,0 +1,529 @@
+{
+    "manifest": {
+        "displayName": "Flash light",
+        "invocationName": "Flash light",
+        "category": "PRODUCTIVITY"
+    },
+    "actions": [
+        {
+            "name": "com.pegatron.actions.FlashLight",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.FlashLight",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "type": "SchemaOrg_Number"
+                    },
+                    {
+                        "name": "speed",
+                        "type": "Speed"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "flash ($Speed:speed)? $SchemaOrg_Number:number times",
+                        "flash $SchemaOrg_Number:number times ($Speed:speed)?"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Flash $number times $speed"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.FlashLight",
+                                    "params": {
+                                        "speed": "$speed",
+                                        "number": "$number"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+		{
+            "name": "com.pegatron.actions.SwitchControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.SwitchControl",
+				"parameters": [
+                    {
+                        "name": "switch",
+                        "type": "Switch"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "switch $Switch:switch",
+                        "put switch $Switch:switch"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, Switch $switch"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.SwitchControl",
+									"params": {
+                                        "switch": "$switch"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+		{
+            "name": "com.pegatron.actions.MusicControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.MusicControl",
+				"parameters": [
+                    {
+                        "name": "status",
+                        "type": "Status"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "hub $Status:status",
+                        "pearl hub $Status:status",
+                        "pearl $Status:status"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, Perla Hub $status"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.MusicControl",
+									"params": {
+                                        "status": "$status"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+		{
+            "name": "com.pegatron.actions.DoorLookControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.DoorLookControl",
+				"parameters": [
+                    {
+                        "name": "doorlockaction",
+                        "type": "Doorlockaction"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "$Doorlockaction:doorlockaction the door",
+                        "please $Doorlockaction:doorlockaction the door"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, Door $doorlockaction"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.DoorLookControl",
+									"params": {
+                                        "doorlockaction": "$doorlockaction"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+		{
+            "name": "com.pegatron.actions.DisturbControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.DisturbControl",
+				"parameters": [
+                    {
+                        "name": "motion",
+                        "type": "Motion"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "set do not disturb $Motion:motion",
+                        "please set do not disturb $Motion:motion"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, set do not disturb $motion"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.DisturbControl",
+									"params": {
+                                        "motion": "$motion"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+       },
+	   {
+            "name": "com.pegatron.actions.VolumeControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.VolumeControl",
+				"parameters": [
+                    {
+                        "name": "switch",
+                        "type": "Switch"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "pearl hub volume $Switch:switch",
+                        "pearl volume $Switch:switch",
+						"set pearl hub volume $Switch:switch",
+                        "set pearl volume $Switch:switch"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, set the vloume $switch"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.VolumeControl",
+									"params": {
+                                        "switch": "$switch"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+		{
+            "name": "com.pegatron.actions.VolumeValueControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.VolumeValueControl",
+				"parameters": [
+                    {
+                        "name": "number",
+                        "type": "SchemaOrg_Number"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "pearl hub volume value to $SchemaOrg_Number:number",
+                        "pearl volume to $SchemaOrg_Number:number",
+						"set pearl hub volume value to $SchemaOrg_Number:number",
+						"set pearl volume to $SchemaOrg_Number:number"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay, set the vloume vlaue to $number"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.VolumeValueControl",
+									"params": {
+                                        "number": "$number"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+	   	{
+            "name": "com.pegatron.actions.PhoneCallControl",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.pegatron.intents.PhoneCallControl",
+				"parameters": [
+                    {
+                        "name": "callaction",
+                        "type": "Callaction"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "$Callaction:callaction the call",
+                        "please $Callaction:callaction the call"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Okay,$callaction the call "
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.pegatron.commands.PhoneCallControl",
+									"params": {
+                                        "callaction": "$callaction"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+       }
+    ],
+    "types": [
+        {
+            "name": "$Speed",
+            "entities": [
+                {
+                    "key": "SLOWLY",
+                    "synonyms": [
+                        "slowly",
+                        "slow"
+                    ]
+                },
+                {
+                    "key": "NORMALLY",
+                    "synonyms": [
+                        "normally",
+                        "regular"
+                    ]
+                },
+                {
+                    "key": "QUICKLY",
+                    "synonyms": [
+                        "quickly",
+                        "fast",
+                        "quick"
+                    ]
+                }
+            ]
+        },
+		{
+            "name": "$Switch",
+            "entities": [
+                {
+                    "key": "UP",
+                    "synonyms": [
+                        "up"
+                    ]
+                },
+				{
+                    "key": "DOWN",
+                    "synonyms": [
+                        "down"
+                    ]
+                }
+            ]
+        },
+		{
+            "name": "$Status",
+            "entities": [
+                {
+                    "key": "PLAY",
+                    "synonyms": [
+                        "music play",
+                        "play",
+                        "song play"
+                    ]
+                },
+                {
+                    "key": "STOP",
+                    "synonyms": [
+                        "music stop",
+                        "stop",
+                        "song stop"
+                    ]
+                },
+				{
+                    "key": "PAUSE",
+                    "synonyms": [
+                        "music pause",
+                        "pause",
+                        "song pause"
+                    ]
+                },
+				{
+                    "key": "NEXT",
+                    "synonyms": [
+                        "music next",
+                        "next",
+                        "next song"
+                    ]
+                },
+				{
+                    "key": "PREVIOUS",
+                    "synonyms": [
+                        "music previous",
+                        "previous",
+                        "previous song"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "$Motion",
+            "entities": [
+                {
+                    "key": "ON",
+                    "synonyms": [
+                        "on"
+                    ]
+                },
+				{
+                    "key": "OFF",
+                    "synonyms": [
+                        "off"
+                    ]
+                }
+            ]
+        },
+		{
+            "name": "$Doorlockaction",
+            "entities": [
+                {
+                    "key": "LOCK",
+                    "synonyms": [
+                        "lock"
+                    ]
+                },
+				{
+                    "key": "UNLOCK",
+                    "synonyms": [
+                        "unlock"
+                    ]
+                }
+            ]
+        },
+		{
+            "name": "$Callaction",
+            "entities": [
+                {
+                    "key": "ANSWER",
+                    "synonyms": [
+                        "answer"
+                    ]
+                },
+				{
+                    "key": "HANGUP",
+                    "synonyms": [
+                        "hang up"
+                    ]
+                }
+            ]
+        }
+    ]
+}
